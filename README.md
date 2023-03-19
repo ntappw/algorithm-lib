@@ -2,7 +2,7 @@
 
 ## Sort
 - [x] Counting sort
-- [ ] Merge sort
+- [x] Merge sort
 - [ ] Bubble sort
 - [x] Insertion sort 
 - [ ] Selection sort
