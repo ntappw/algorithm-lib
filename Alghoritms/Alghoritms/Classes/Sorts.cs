@@ -13,7 +13,7 @@ public static class Sorts
         => (arg0, arg1) = (arg1, arg0);
 
 
-    #region SortByCounting
+    #region CountingSort
 
     /// <summary>
     /// Counting sorting can ONLY be used for arrays whose elements are numbers, like 0, 1, 2, 3 ... 9.
@@ -96,7 +96,7 @@ public static class Sorts
 
         if (array.Length % 2 == 0)
         {
-            resultArray = new int[array.Length - array.Length / 2 ];
+            resultArray = new int[array.Length - array.Length / 2];
             for (int i = 0; i < resultArray.Length; ++i)
                 resultArray[i] = array[i + resultArray.Length];
         }
@@ -107,7 +107,7 @@ public static class Sorts
             for (int i = 0; i < resultArray.Length; ++i)
                 resultArray[i] = array[i + resultArray.Length - 1];
         }
-            
+
         return resultArray;
     }
 
@@ -124,8 +124,35 @@ public static class Sorts
 
         int[] leftPart = GetLeftPart(array);
         int[] rightPart = GetRightPart(array);
-        
+
         return Merge(MergeSort(leftPart), MergeSort(rightPart));
+    }
+
+    #endregion
+
+    #region InsertionSort
+
+    /// <summary>
+    /// The complexity of the algorithm is estimated by O(n^2).
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <returns>Sorted integer array</returns>
+    public static int[] InsertionSort(int[] array)
+    {
+        if (array.Length == 1)
+            return array;
+
+        int[] resultArray = array;
+        for (int i = 0, j; i < array.Length; ++i)
+        {
+            j = i;
+            while (j > 0 && array[j] < array[j - 1])
+            {
+                Swap(ref array[j], ref array[j - 1]);
+                j--;
+            }
+        }
+        return resultArray;
     }
 
     #endregion
