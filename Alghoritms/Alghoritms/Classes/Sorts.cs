@@ -21,7 +21,7 @@ public static class Sorts
     /// </summary>
     /// <param name="array">Source unsorted array</param>
     /// <returns>null, if array contains incorrect numbers</returns>
-    /// <returns>sorted integer array</returns>
+    /// <returns>Sorted integer array</returns>
     public static int[]? CountingSort(int[] array)
     {
         if (array.Length == 0)
@@ -52,15 +52,81 @@ public static class Sorts
     #region MergeSort
 
     /// <summary>
-    /// 
+    /// It merges two sorted arrays in one
     /// </summary>
-    /// <param name="array"></param>
-    /// <returns></returns>
+    /// <param name="arr0">First array</param>
+    /// <param name="arr1">Second array</param>
+    /// <returns>Merged integer array</returns>
+    private static int[] Merge(int[] arr0, int[] arr1)
+    {
+        int[] resultArr = new int[arr0.Length + arr1.Length];
+        int i = 0,
+            j = 0;
+
+        while (i < arr0.Length || j < arr1.Length)
+            if (j == arr1.Length || i < arr0.Length && arr0[i] < arr1[j])
+                resultArr[i + j] = arr0[i++];
+            else
+                resultArr[i + j] = arr1[j++];
+        return resultArr;
+    }
+
+    /// <summary>
+    /// Needs to divide array to two halves.
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <returns>Left half of integer array</returns>
+    private static int[] GetLeftPart(int[] array)
+    {
+        int[] resultArray = new int[array.Length / 2];
+
+        for (int i = 0; i < resultArray.Length; ++i)
+            resultArray[i] = array[i];
+        return resultArray;
+    }
+
+    /// <summary>
+    /// Needs to divide array to two halves.
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <returns>Right half of integer array</returns>
+    private static int[] GetRightPart(int[] array)
+    {
+        int[] resultArray;
+
+        if (array.Length % 2 == 0)
+        {
+            resultArray = new int[array.Length - array.Length / 2 ];
+            for (int i = 0; i < resultArray.Length; ++i)
+                resultArray[i] = array[i + resultArray.Length];
+        }
+
+        else
+        {
+            resultArray = new int[array.Length - array.Length / 2];
+            for (int i = 0; i < resultArray.Length; ++i)
+                resultArray[i] = array[i + resultArray.Length - 1];
+        }
+            
+        return resultArray;
+    }
+
+    /// <summary>
+    /// The complexity of the algorithm is O(n log n).
+    /// The algorithm is fast enough.
+    /// </summary>
+    /// <param name="array">Source unsorted array</param>
+    /// <returns>Sorted integer array</returns>
     public static int[] MergeSort(int[] array)
     {
-        return new[] { 1};
+        if (array.Length <= 1)
+            return array;
+
+        int[] leftPart = GetLeftPart(array);
+        int[] rightPart = GetRightPart(array);
+        
+        return Merge(MergeSort(leftPart), MergeSort(rightPart));
     }
-    
 
     #endregion
 }
