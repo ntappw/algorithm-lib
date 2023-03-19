@@ -22,7 +22,7 @@ public static class Sorts
     /// <param name="array">Source unsorted array</param>
     /// <returns>null, if array contains incorrect numbers</returns>
     /// <returns>sorted integer array</returns>
-    public static int[]? SortByCounting(int[] array)
+    public static int[]? CountingSort(int[] array)
     {
         if (array.Length == 0)
             return array;
@@ -46,6 +46,21 @@ public static class Sorts
 
         return sortedArray;
     }
+
+    #endregion
+
+    #region MergeSort
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="array"></param>
+    /// <returns></returns>
+    public static int[] MergeSort(int[] array)
+    {
+        return new[] { 1};
+    }
+    
 
     #endregion
 }
