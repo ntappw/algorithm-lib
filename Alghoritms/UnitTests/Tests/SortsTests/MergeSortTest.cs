@@ -8,7 +8,7 @@ public class MergeSortTest
     [TestMethod]
     public void CorrectSortTest()
     {
-        CollectionAssert.AreEqual(Sorts.CountingSort(
+        CollectionAssert.AreEqual(Sorts.MergeSort(
                 new int[] { 9, 0, 1, 8, 7, 5 }),
             new int[] { 0, 1, 5, 7, 8, 9 });
     }
@@ -16,7 +16,7 @@ public class MergeSortTest
     [TestMethod]
     public void OneElementArrayTest()
     {
-        CollectionAssert.AreEqual(Sorts.CountingSort(
+        CollectionAssert.AreEqual(Sorts.MergeSort(
                 new int[] { 9 }),
             new int[] { 9 });
     }
@@ -24,7 +24,7 @@ public class MergeSortTest
     [TestMethod]
     public void OnlyOneNumberRepeatsTest()
     {
-        CollectionAssert.AreEqual(Sorts.CountingSort(
+        CollectionAssert.AreEqual(Sorts.MergeSort(
                 new int[] { 9, 9, 9, 9, 9, 9, 9 }),
             new int[] { 9, 9, 9, 9, 9, 9, 9 });
     }
