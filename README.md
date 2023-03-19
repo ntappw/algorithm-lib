@@ -1,2 +1,11 @@
-# algorithm-lib
-A library of classes with different algorithms that I have been and am learning.
+# Algorithms that are implemented
+
+## Sort
+- [x] Counting sort
+- [ ] Merge sort
+- [ ] Bubble sort
+- [ ] Insertion sort 
+- [ ] Selection sort
+- [ ] Heapsort
+- [ ] Quicksort
+- [ ] Tree sort
