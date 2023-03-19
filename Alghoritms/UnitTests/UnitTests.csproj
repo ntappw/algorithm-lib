@@ -20,4 +20,8 @@
       <ProjectReference Include="..\Alghoritms\Alghoritms.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Tests" />
+    </ItemGroup>
+
 </Project>

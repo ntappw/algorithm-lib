@@ -1,6 +1,6 @@
 using Alghoritms.Classes;
 
-namespace UnitTests.SortsTests;
+namespace UnitTests.Tests.SortsTests;
 
 [TestClass]
 public class SortByCountingTest
