@@ -14,6 +14,14 @@ public class CountingSortTest
     }
     
     [TestMethod]
+    public void OneElementArrayTest()
+    {
+        CollectionAssert.AreEqual(Sorts.CountingSort(
+                new int[]{9}),
+            new int[]{9});
+    }
+    
+    [TestMethod]
     public void IncorrectSortTest()
     {
         Assert.AreEqual(Sorts.CountingSort(
