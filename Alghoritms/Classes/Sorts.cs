@@ -152,7 +152,90 @@ public static class Sorts
                 j--;
             }
         }
+
         return resultArray;
+    }
+
+    #endregion
+
+    #region Heapsort
+
+    /// <summary>
+    /// Heap insert inserts element in array (Sift up method)
+    /// </summary>
+    /// <param name="array">Array to insert</param>
+    /// <param name="element">Element to insert</param>
+    /// <returns>Sift up array with inserted element</returns>
+    private static int[] InsertHeap(int[] array, int element)
+    {
+        int[] result = new int[array.Length + 1];
+        for (int i = 0; i < array.Length; ++i)
+            result[i] = array[i];
+        result[^1] = element;
+
+        int counter = result.Length - 1;
+        while (counter > 0 && result[counter] < result[(counter - 1) / 2]) //Named "Sift up"
+        {
+            Swap(ref result[counter], ref result[(counter - 1) / 2]);
+            counter = (counter - 1) / 2;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Heap remove min element in array (Sift down method)
+    /// </summary>
+    /// <param name="array">Source Array</param>
+    /// <returns>Removed min element sift down array</returns>
+    private static int[] RemoveMinHeap(int[] array)
+    {
+        Swap(ref array[0], ref array[^1]);
+
+        int i = 0, j;
+        while (2 * i + 1 < array.Length) // Named "Sift down"
+        {
+            j = 2 * i + 1;
+            if (2 * i + 2 < array.Length && array[2 * i + 2] < array[j])
+                j = 2 * i + 2;
+            if (array[i] <= array[j])
+                break;
+            else
+            {
+                Swap(ref array[i], ref array[j]);
+                i = j;
+            }
+        }
+
+        return array;
+    }
+
+    /// <summary>
+    /// Binary tree (like binary heap).
+    /// The complexity of the algorithm is O(n log n).
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <returns>Sorted integer array</returns>
+    public static int[] Heapsort(int[] array)
+    {
+        // Parent index is ((i - 1) / 2)
+        // Left child index is (2 * i + 1)
+        // Right child index is (2 * i + 2)
+
+        if (array.Length == 1)
+            return array;
+
+        int[] result = new int[array.Length];
+        
+        for (int i = 0; i < array.Length; ++i)
+            result = InsertHeap(array, array[i]);
+        for (int i = 0; i < array.Length; ++i)
+        {
+            result[i] = result.Min();
+            result = RemoveMinHeap(result);
+        }
+
+        return result;
     }
 
     #endregion
