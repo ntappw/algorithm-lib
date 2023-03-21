@@ -166,21 +166,30 @@ public static class Sorts
     /// <param name="array">Array to insert</param>
     /// <param name="element">Element to insert</param>
     /// <returns>Sift up array with inserted element</returns>
-    private static int[] InsertHeap(int[] array, int element)
+    private static void InsertHeap(ref int[] array, int element)
     {
+        if (array == Array.Empty<int>())
+        {
+            array = new int[] { element };
+            return;
+        }
+
         int[] result = new int[array.Length + 1];
-        for (int i = 0; i < array.Length; ++i)
+        for (int i = 0; i < array.Length; i++)
             result[i] = array[i];
         result[^1] = element;
 
-        int counter = result.Length - 1;
-        while (counter > 0 && result[counter] < result[(counter - 1) / 2]) //Named "Sift up"
-        {
-            Swap(ref result[counter], ref result[(counter - 1) / 2]);
-            counter = (counter - 1) / 2;
-        }
+        array = new int[result.Length];
+        for (int i = 0; i < array.Length; ++i)
+            array[i] = result[i];
 
-        return result;
+        int n = array.Length - 1;
+        int el = array[(n - 1) / 2];
+        while (n > 0 && array[n] < array[(n - 1) / 2]) //Named "Sift up"
+        {
+            Swap(ref array[n], ref array[(n - 1) / 2]);
+            n = (n - 1) / 2;
+        }
     }
 
     /// <summary>
@@ -188,17 +197,38 @@ public static class Sorts
     /// </summary>
     /// <param name="array">Source Array</param>
     /// <returns>Removed min element sift down array</returns>
-    private static int[] RemoveMinHeap(int[] array)
+    private static void RemoveMinHeap(ref int[] array)
     {
+        if(array == Array.Empty<int>())
+            return;
+        
         Swap(ref array[0], ref array[^1]);
+        
+        int[] result = new int[array.Length - 1];
+        
+        int? min = array.Min();
+        for (int n = 0, idx = 0; n < array.Length; n++)
+            if (min != null && array[n] == min)
+            {
+                min = null;
+                continue;   
+            }
+            else
+                result[idx++] = array[n];
 
-        int i = 0, j;
+
+        array = new int[result.Length];
+        for (int n = 0; n < result.Length; n++)
+            array[n] = result[n];
+
+        int i = 0;
         while (2 * i + 1 < array.Length) // Named "Sift down"
         {
-            j = 2 * i + 1;
-            if (2 * i + 2 < array.Length && array[2 * i + 2] < array[j])
+            int j = 2 * i + 1;
+            int TWO = 2 * i + 2;
+            if (2 * i + 2 < array.Length && array[2 * i + 2] <= array[j])
                 j = 2 * i + 2;
-            if (array[i] <= array[j])
+            if (array[i] > array[j])
                 break;
             else
             {
@@ -207,7 +237,7 @@ public static class Sorts
             }
         }
 
-        return array;
+        array = array.Reverse().ToArray();
     }
 
     /// <summary>
@@ -225,17 +255,18 @@ public static class Sorts
         if (array.Length == 1)
             return array;
 
-        int[] result = new int[array.Length];
-        
+        int[] heap = Array.Empty<int>();
+
         for (int i = 0; i < array.Length; ++i)
-            result = InsertHeap(array, array[i]);
+            InsertHeap(ref heap, array[i]);
+
         for (int i = 0; i < array.Length; ++i)
         {
-            result[i] = result.Min();
-            result = RemoveMinHeap(result);
+            array[i] = heap.Min();
+            RemoveMinHeap(ref heap);
         }
 
-        return result;
+            return array;
     }
 
     #endregion
