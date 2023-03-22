@@ -8,4 +8,3 @@
 - [ ] Selection sort
 - [x] Heapsort
 - [ ] Quicksort
-- [ ] Tree sort
