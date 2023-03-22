@@ -24,7 +24,7 @@ public static class Sorts
     /// <returns>Sorted integer array</returns>
     public static int[]? CountingSort(int[] array)
     {
-        if (array.Length == 0)
+        if (array.Length <= 1)
             return array;
 
         //When we count complexity of alghoritm, we do not take into account the cycle of value checking.
@@ -139,7 +139,7 @@ public static class Sorts
     /// <returns>Sorted integer array</returns>
     public static int[] InsertionSort(int[] array)
     {
-        if (array.Length == 1)
+        if (array.Length <= 1)
             return array;
 
         int[] resultArray = array;
@@ -199,19 +199,19 @@ public static class Sorts
     /// <returns>Removed min element sift down array</returns>
     private static void RemoveMinHeap(ref int[] array)
     {
-        if(array == Array.Empty<int>())
+        if (array == Array.Empty<int>())
             return;
-        
+
         Swap(ref array[0], ref array[^1]);
-        
+
         int[] result = new int[array.Length - 1];
-        
+
         int? min = array.Min();
         for (int n = 0, idx = 0; n < array.Length; n++)
             if (min != null && array[n] == min)
             {
                 min = null;
-                continue;   
+                continue;
             }
             else
                 result[idx++] = array[n];
@@ -252,7 +252,7 @@ public static class Sorts
         // Left child index is (2 * i + 1)
         // Right child index is (2 * i + 2)
 
-        if (array.Length == 1)
+        if (array.Length <= 1)
             return array;
 
         int[] heap = Array.Empty<int>();
@@ -266,7 +266,39 @@ public static class Sorts
             RemoveMinHeap(ref heap);
         }
 
+        return array;
+    }
+
+    #endregion
+
+    #region BubbleSort
+
+    /// <summary>
+    /// Bubble sort is very simple alg.
+    /// The complexity of the algorithm is O(n^2).
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <returns>Sorted integer array</returns>
+    public static int[] BubbleSort(int[] array)
+    {
+        if (array.Length <= 1)
             return array;
+        
+        bool isSwapped;
+        do
+        {
+            isSwapped = false;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    Swap(ref array[i], ref array[i + 1]);
+                    isSwapped = true;
+                }
+            }
+        } while (isSwapped);
+        
+        return array;
     }
 
     #endregion
