@@ -6,6 +6,6 @@
 - [ ] Bubble sort
 - [x] Insertion sort 
 - [ ] Selection sort
-- [x] Heapsort (but needs fixes)
+- [x] Heapsort
 - [ ] Quicksort
 - [ ] Tree sort
