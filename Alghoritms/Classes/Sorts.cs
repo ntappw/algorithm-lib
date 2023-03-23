@@ -283,7 +283,7 @@ public static class Sorts
     {
         if (array.Length <= 1)
             return array;
-        
+
         bool isSwapped;
         do
         {
@@ -297,7 +297,58 @@ public static class Sorts
                 }
             }
         } while (isSwapped);
+
+        return array;
+    }
+
+    #endregion
+
+    #region QuickSort
+
+    /// <summary>
+    /// The complexity of the algorithm is O(log n).
+    /// The algorithm is fast enough.
+    /// </summary>
+    /// <param name="array">Source array</param>
+    /// <param name="leftIdx">Index of left half</param>
+    /// <param name="rightIdx">Index of right half</param>
+    /// <returns>Sorted integer array</returns>
+    public static int[] QuickSort(int[] array, int leftIdx = -1, int rightIdx = -1)
+    {
+        if (array.Length <= 1)
+            return array;
+
+        if (leftIdx == -1)
+            leftIdx = 0;
+        if (rightIdx == -1)
+            rightIdx = array.Length - 1;
         
+        var i = leftIdx;
+        var j = rightIdx;
+        var pivot = array[leftIdx];
+        while (i <= j)
+        {
+            while (array[i] < pivot)
+            {
+                i++;
+            }
+        
+            while (array[j] > pivot)
+            {
+                j--;
+            }
+            if (i <= j)
+            {
+                Swap(ref array[i], ref array[j]);
+                i++;
+                j--;
+            }
+        }
+    
+        if (leftIdx < j)
+            QuickSort(array, leftIdx, j);
+        if (i < rightIdx)
+            QuickSort(array, i, rightIdx);
         return array;
     }
 
