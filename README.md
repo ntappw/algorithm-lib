@@ -7,4 +7,4 @@
 - [x] Insertion sort 
 - [ ] Selection sort
 - [x] Heapsort
-- [ ] Quicksort
+- [x] Quicksort
